@@ -8,47 +8,79 @@ function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-prompt('Welcome to Calculator!');
+function getNumber(whichNumber = 'first') {
+  prompt(`Enter your ${whichNumber} number:`);
+  let number = readline.question();
 
-prompt("What's the first number?");
-let number1 = readline.question();
-
-while (invalidNumber(number1)) {
-  prompt("Hmm... that doesn't look like a valid number.");
-  number1 = readline.question();
+  while (invalidNumber(number)) {
+    prompt("Hmm... that doesn't look like a valid number.");
+    prompt("Please enter a number:");
+    number = readline.question();
+  }
+  return Number(number);
 }
 
-prompt("What's the second number?");
-let number2 = readline.question();
+function getOperator() {
+  prompt(`What operation would you like to perform?
+  Please enter the number next to your desired operation.
+  (1) Add
+  (2) Subtract
+  (3) Multiply
+  (4) Divide`);
+  let operator = readline.question();
 
-while (invalidNumber(number2)) {
-  prompt("Hmm... that doesn't look like a valid number.");
-  number2 = readline.question();
+  while (!['1', '2', '3', '4'].includes(operator)) {
+    prompt("Hmm... that doesn't look like a valid operation.");
+    prompt('Please enter a number 1, 2, 3, or 4.');
+    operator = readline.question();
+  }
+  return operator;
 }
 
-prompt(`What operation would you like to perform? \
-        \n1) Add 2) Subtract 3) Multiply 4) Divide`);
-let operation = readline.question();
-
-while (!['1','2','3','4'].includes(operation)) {
-  prompt('Must choose 1, 2, 3, or 4');
-  operation = readline.question();
+function performOperation(operator, number1, number2) {
+  let result;
+  switch (operator) {
+    case '1':
+      result = number1 + number2;
+      break;
+    case '2':
+      result = number1 - number2;
+      break;
+    case '3':
+      result = number1 * number2;
+      break;
+    case '4':
+      result = number1 / number2;
+      break;
+  }
+  return result;
 }
 
-let output;
-switch (operation) {
-  case '1':
-    output = Number(number1) + Number(number2);
-    break;
-  case '2':
-    output = Number(number1) - Number(number2);
-    break;
-  case '3':
-    output = Number(number1) * Number(number2);
-    break;
-  case '4':
-    output = Number(number1) / Number(number2);
-    break;
+function calculator(firstRun = true) {
+
+  if (firstRun) {
+    prompt('Welcome to Calculator!');
+    prompt('This program allows you to add, subtract, multiply or divide two '
+      + 'numbers.');
+  }
+
+  let number1 = getNumber('first');
+  let number2 = getNumber('second');
+  let operator = getOperator(number1, number2);
+  let result = performOperation(operator, number1, number2);
+
+  prompt(`Your result is ${result}.`);
 }
 
-console.log(`The result it ${output}`);
+let runAgain;
+let firstRun = true;
+do {
+  calculator(firstRun);
+  prompt('Would you like to use the calculator again?');
+  prompt('Enter "y" to use the calculator again. ' +
+         "Enter anything else to end the program");
+  runAgain = readline.question();
+  firstRun = false;
+} while (runAgain === 'y');
+
+prompt('Thank you for trying this calculator. Goodbye!');
