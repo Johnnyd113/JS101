@@ -1,4 +1,5 @@
 const readline = require('readline-sync');
+const MESSAGES = require('./calculator_messages.json');
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -9,29 +10,23 @@ function invalidNumber(number) {
 }
 
 function getNumber(whichNumber = 'first') {
-  prompt(`Enter your ${whichNumber} number:`);
+  prompt(MESSAGES['enterNumber1'] + `${whichNumber}` + MESSAGES['enterNumber2']);
   let number = readline.question();
 
   while (invalidNumber(number)) {
-    prompt("Hmm... that doesn't look like a valid number.");
-    prompt("Please enter a number:");
+    prompt(MESSAGES['invalidNumber']);
+    prompt(MESSAGES['invalidEnterNumber']);
     number = readline.question();
   }
   return Number(number);
 }
 
 function getOperator() {
-  prompt(`What operation would you like to perform?
-  Please enter the number next to your desired operation.
-  (1) Add
-  (2) Subtract
-  (3) Multiply
-  (4) Divide`);
+  prompt(MESSAGES['getOperator']);
   let operator = readline.question();
 
   while (!['1', '2', '3', '4'].includes(operator)) {
-    prompt("Hmm... that doesn't look like a valid operation.");
-    prompt('Please enter a number 1, 2, 3, or 4.');
+    prompt(MESSAGES['invalidOperation']);
     operator = readline.question();
   }
   return operator;
@@ -50,37 +45,29 @@ function performOperation(operator, number1, number2) {
       result = number1 * number2;
       break;
     case '4':
+      if (number2 === 0) prompt(MESSAGES['divideByZero']);
       result = number1 / number2;
       break;
   }
-  return result;
+
+  if (Number.isNaN(result)) prompt(MESSAGES['isNaN']);
+  else prompt(MESSAGES['result'] + `${result}.`);
 }
 
-function calculator(firstRun = true) {
+// Begining of application
 
-  if (firstRun) {
-    prompt('Welcome to Calculator!');
-    prompt('This program allows you to add, subtract, multiply or divide two '
-      + 'numbers.');
-  }
+prompt(MESSAGES['greet']);
 
+let runAgain;
+do {
   let number1 = getNumber('first');
   let number2 = getNumber('second');
   let operator = getOperator(number1, number2);
-  let result = performOperation(operator, number1, number2);
+  performOperation(operator, number1, number2);
 
-  prompt(`Your result is ${result}.`);
-}
-
-let runAgain;
-let firstRun = true;
-do {
-  calculator(firstRun);
-  prompt('Would you like to use the calculator again?');
-  prompt('Enter "y" to use the calculator again. ' +
-         "Enter anything else to end the program");
+  prompt(MESSAGES['runAgain']);
   runAgain = readline.question();
-  firstRun = false;
+
 } while (runAgain === 'y');
 
-prompt('Thank you for trying this calculator. Goodbye!');
+prompt(MESSAGES['goodbye']);

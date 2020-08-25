@@ -1,0 +1,15 @@
+{
+  "enterNumber1": "Enter your ",
+  "enterNumber2": " number:",
+  "invalidNumber": "Hmm... that doesn't look like a valid number.",
+  "invalidEnterNumber": "Please enter a number:",
+  "getOperator": "What operation would you like to perform?\nPlease enter the number next to your desired operation.\n(1) Add\n(2) Subtract\n(3) Multiply\n(4) Divide",
+  "invalidOperation": "Hmm... that doesn't look like a valid operation.\n=> Please enter a number 1, 2, 3, or 4.",
+  "divideByZero": "Caution: you are trying to divide by 0.",
+  "isNaN": "Your result is not a number.",
+  "result": "Your result is ",
+  "greet": "Welcome to Calculator!\n=> This program allows you to add, subtract, multiply or divide two numbers.",
+  "runAgain": "Would you like to use the calculator again?\n=> Enter \"y\" to use the calculator again. Enter anything else to end the program.",
+  "goodbye": "Thank you for trying this calculator. Goodbye!"
+
+}
