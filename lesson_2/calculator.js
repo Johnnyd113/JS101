@@ -45,16 +45,17 @@ function performOperation(operator, number1, number2) {
       result = number1 * number2;
       break;
     case '4':
-      if (number2 === 0) prompt(MESSAGES['divideByZero']);
-      result = number1 / number2;
-      break;
+      if (number2 === 0) {
+        prompt(MESSAGES['divideByZero']);
+        result = 'undefined';
+      } else result = number1 / number2;
   }
 
-  if (Number.isNaN(result)) prompt(MESSAGES['isNaN']);
-  else prompt(MESSAGES['result'] + `${result}.`);
+  prompt(MESSAGES['result'] + `${result}.`);
 }
 
 // Begining of application
+console.clear();
 
 prompt(MESSAGES['greet']);
 
