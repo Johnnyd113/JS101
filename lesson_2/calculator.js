@@ -67,7 +67,7 @@ do {
   performOperation(operator, number1, number2);
 
   prompt(MESSAGES['runAgain']);
-  runAgain = readline.question();
+  runAgain = readline.question().toLowerCase();
 
 } while (runAgain === 'y');
 
