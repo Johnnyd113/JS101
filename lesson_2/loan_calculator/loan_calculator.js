@@ -60,8 +60,8 @@ function calcMonthlyIntRate(loanAPR) {
 
 function calcMonthlyPayment(loanAmount, monthlyIntRate, loanDurationMonths) {
   let monthlyPayment = loanAmount *
-  (monthlyIntRate / (1 - Math.pow((1 + monthlyIntRate),
-    (-loanDurationMonths))));
+                       (monthlyIntRate / (1 - Math.pow((1 + monthlyIntRate),
+                         (-loanDurationMonths))));
 
   return monthlyPayment;
 }
