@@ -5,15 +5,35 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function invalidNumber(number) {
+function isInvalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
+function inputRunAgain(inputRunAgain) {
+  prompt(MESSAGES['runAgain']);
+  inputRunAgain = readline.question().toLowerCase();
+
+  while (!['yes', 'y', 'no', 'n'].includes(inputRunAgain)) {
+    prompt(MESSAGES['invalidRunAgain']);
+    inputRunAgain = readline.question().toLowerCase();
+  }
+  return inputRunAgain;
+}
+
+function calculateDivision(number1, number2) {
+  if (number2 === 0) {
+    prompt(MESSAGES['divideByZero']);
+    return 'undefined';
+  } else {
+    return number1 / number2;
+  }
+}
+
 function getNumber(whichNumber = 'first') {
-  prompt(MESSAGES['enterNumber1'] + `${whichNumber}` + MESSAGES['enterNumber2']);
+  prompt(MESSAGES[`${whichNumber}Number`]);
   let number = readline.question();
 
-  while (invalidNumber(number)) {
+  while (isInvalidNumber(number)) {
     prompt(MESSAGES['invalidNumber']);
     prompt(MESSAGES['invalidEnterNumber']);
     number = readline.question();
@@ -45,10 +65,7 @@ function performOperation(operator, number1, number2) {
       result = number1 * number2;
       break;
     case '4':
-      if (number2 === 0) {
-        prompt(MESSAGES['divideByZero']);
-        result = 'undefined';
-      } else result = number1 / number2;
+      result = calculateDivision(number1, number2);
   }
 
   prompt(MESSAGES['result'] + `${result}.`);
@@ -66,9 +83,8 @@ do {
   let operator = getOperator(number1, number2);
   performOperation(operator, number1, number2);
 
-  prompt(MESSAGES['runAgain']);
-  runAgain = readline.question().toLowerCase();
+  runAgain = inputRunAgain(runAgain);
 
-} while (runAgain === 'y');
+} while (runAgain === 'y' || runAgain === 'yes');
 
 prompt(MESSAGES['goodbye']);
