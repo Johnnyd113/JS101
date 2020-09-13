@@ -1,0 +1,9 @@
+{
+  "welcome": "Welcome to the loan calculator.",
+  "enterLoanAmount": "Please enter your loan amount. eg 10000.00 \n do not enter commas with the dollar amount.",
+  "invalidNumber": "Must enter a positive number.",
+  "enterAPR": "Please enter the APR on your loan.\n=> Please enter 2.5 for 2.5%",
+  "enterLoanDuration": "Please enter the loan duration in years.",
+  "paymentAmount": "Monthly payment amount is: ",
+  "runAgain": "Enter 'y' to run again."
+}
