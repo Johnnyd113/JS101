@@ -2,17 +2,18 @@ let flintstones = ['Fred', 'Wilma'];
 flintstones.push(['Barney', 'Betty']);
 flintstones.push(['Bambam', 'Pebbles']);
 
-// solution 1
-let flintstones1 = [];
-flintstones.forEach(num => {
-  if (typeof num === 'object') {
-    num.forEach(num2 => flintstones1.push(num2));
-  } else flintstones1.push(num);
+let flintstones2 = [];
+flintstones.forEach(function(a) {
+  flintstones2 = flintstones2.concat(a);
 });
 
-// solution 2
-let flintstones2 = [];
+let flintstones3 = [];
+flintstones3 = [].concat(...flintstones);
 
+let flintstones4 = [];
+flintstones4 = flintstones.reduce((acc, cv) => acc.concat(cv), []);
 
 console.log(flintstones);
-console.log(flintstones1);
+console.log(flintstones2);
+console.log(flintstones3);
+console.log(flintstones4);
