@@ -1,0 +1,1 @@
+[1, 2, 3].filter(num => 'hi'); // => [1, 2, 3], return value of callback function is 'hi' which is a truthy value
